@@ -42,5 +42,5 @@ class ApiClient {
   delete(path, opts)      { return this.request(path, { ...opts, method: 'DELETE' }); }
 }
 
-const API = new ApiClient('http://localhost:8000');
+const API = new ApiClient(import.meta.env.API_URL);
 export default API;

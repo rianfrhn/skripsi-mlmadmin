@@ -21,7 +21,6 @@ function AppLayout() {
       {isAuthPage ? (
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          {/* Optionally: <Route path="/register" element={<RegisterPage />} /> */}
         </Routes>
       ) : (
         <div className="drawer drawer-mobile">

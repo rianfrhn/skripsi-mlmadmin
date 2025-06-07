@@ -5,7 +5,9 @@ class ApiClient {
 
   async request(path, { method = 'GET', body = null, headers = {} } = {}) {
     const url = `${this.baseURL}/${path.replace(/^\/+/, '')}`;
-    const opts = { method, headers: { ...headers } };
+    const opts = { method, headers: { ...headers }, 
+    credentials: "include"
+    }
 
     if (body != null) {
       if (body instanceof FormData) {

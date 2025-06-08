@@ -44,5 +44,5 @@ class ApiClient {
   delete(path, opts)      { return this.request(path, { ...opts, method: 'DELETE' }); }
 }
 
-const API = new ApiClient("http://responsible-embrace-production.up.railway.app");
+const API = new ApiClient("https://responsible-embrace-production.up.railway.app");
 export default API;

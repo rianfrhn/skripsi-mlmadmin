@@ -10,8 +10,19 @@ import * as d3 from 'd3-force';
  *
  * Renders a force-directed graph where node sizes, link distances, and repulsion are driven by provided weights.
  */
-export default function GraphComponent({ data, weights = {} }) {
+export default function GraphComponent({ data, weights = {}, selectedNodeId = null }) {
   const fgRef = useRef();
+  useEffect(() => {
+    const fg = fgRef.current;
+    if (!fg || !selectedNodeId) return;
+    const nodeObj = data.nodes.find(n => n.id === selectedNodeId);
+    if (nodeObj && nodeObj.x != null && nodeObj.y != null) {
+      fg.centerAt(nodeObj.x, nodeObj.y, 500);
+      fg.zoom(2, 500);
+    }
+    
+    //fg.redraw();
+  }, [selectedNodeId, data]);
 
   //cari terpenting dari weight
   const importantNodeId = useMemo(() => {
@@ -74,7 +85,13 @@ export default function GraphComponent({ data, weights = {} }) {
         const radius = (Math.sqrt(weight) * 8) + 4;
         ctx.beginPath();
         ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = node.id === importantNodeId ? 'red' : 'steelblue';
+        
+       const isSelected = node.id === selectedNodeId;
+       ctx.fillStyle = isSelected
+         ? 'limegreen'
+          : node.id === importantNodeId
+            ? 'red'
+            : 'steelblue';
         ctx.fill();
         const label = `${node.id.toString()}. ${node.agent_name}`;
         const fontSize = 12 / globalScale;

@@ -3,6 +3,7 @@ import API from '../helpers/APIConnector';
 import GraphComponent from '../components/GraphComponent';
 import SegmentedToggle from '../components/SegmentedToggle';
 export default function Laporan() {
+  const [selectedNodeId, setSelectedNodeId] = useState(null);
   const centralityOptions = [
     { label: "Tidak ada", value: "" },
     { label: "Sentralitas Derajat", value: "degree_centrality" },
@@ -72,7 +73,12 @@ const topFive = useMemo(() => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Graph */}
           <div className="lg:col-span-2 bg-base-100 p-4 rounded-lg shadow">
-            <GraphComponent data={graphData} weights={weights} />
+            
+             <GraphComponent
+              data={graphData}
+              weights={weights}
+              selectedNodeId={selectedNodeId}
+            />
           </div>
 
           {/* Top 5 Table */}
@@ -91,7 +97,11 @@ const topFive = useMemo(() => {
                 </thead>
                 <tbody>
                   {topFive.map(({ rank, id, name, score }) => (
-                    <tr key={id}>
+                    <tr
+                      key={id}
+                      className={id === selectedNodeId ? "bg-green-100" : ""}
+                      onClick={() => setSelectedNodeId(id)}
+                    >
                       <td>{rank}</td>
                       <td>{id}</td>
                       <td>{name}</td>

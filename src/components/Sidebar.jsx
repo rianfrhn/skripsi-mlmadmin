@@ -10,7 +10,6 @@ const Sidebar = () => {
         <li><Link to="/agent">Agent</Link></li>
         <li><Link to="/kendaraan">Kendaraan</Link></li>
         <li><Link to="/cicilan">Pembayaran</Link></li>
-        <li><Link to="/komisi">Komisi Reward</Link></li>
         <li><Link to="/laporan">Laporan</Link></li>
         <li><Link to="/settings">Setting Admin</Link></li>
       </ul>

@@ -98,7 +98,7 @@ export default function GraphComponent({ data, weights = {}, selectedNodeId = nu
         ctx.font = `${fontSize}px Sans-Serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = '#777';
         ctx.fillText(label, node.x, node.y + radius + fontSize);
       }}
       linkDirectionalArrowLength={6}
